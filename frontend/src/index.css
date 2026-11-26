@@ -1,0 +1,312 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Root Theme Variables */
+:root {
+  --bg: #0A0E17;
+  --surface: #111827;
+  --fg: #F8FAFC;
+  --muted: #94A3B8;
+  --line: #1E293B;
+  --accent: #D4AF37;
+  --secondary: #161F30;
+}
+
+.dark {
+  --bg: #0A0E17;
+  --surface: #111827;
+  --fg: #F8FAFC;
+  --muted: #94A3B8;
+  --line: #1E293B;
+  --accent: #D4AF37;
+  --secondary: #161F30;
+}
+
+/* Base Document Styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  font-family: "Inter Tight", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  background-color: var(--bg);
+  color: var(--fg);
+  overflow-x: hidden;
+}
+
+/* Ambient Slow Glow Pulses */
+@keyframes ambient-glow {
+  0%, 100% {
+    transform: scale(1) translate(0px, 0px);
+    opacity: 0.15;
+  }
+  50% {
+    transform: scale(1.1) translate(20px, -20px);
+    opacity: 0.25;
+  }
+}
+
+.animate-ambient-glow-1 {
+  animation: ambient-glow 14s ease-in-out infinite;
+}
+
+.animate-ambient-glow-2 {
+  animation: ambient-glow 18s ease-in-out infinite reverse;
+}
+
+/* Subtle Shimmer for Headlines */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-text {
+  background: linear-gradient(90deg, #F8FAFC 0%, #D4AF37 50%, #F8FAFC 100%);
+  background-size: 200% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* Film-strip editorial divider */
+.film-strip {
+  height: 6px;
+  background: repeating-linear-gradient(90deg, #1E293B 0px, #1E293B 16px, transparent 16px, transparent 26px);
+  border-radius: 2px;
+}
+
+/* Dark sleek scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0E17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1E293B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+/* Metrics Continuous Sliding Marquee Tracks */
+@keyframes slide-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slide-rtl {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.metrics-slide-track-ltr {
+  display: flex;
+  width: max-content;
+  animation: slide-ltr 38s linear infinite;
+  will-change: transform;
+}
+
+.metrics-slide-track-rtl {
+  display: flex;
+  width: max-content;
+  animation: slide-rtl 38s linear infinite;
+  will-change: transform;
+}
+
+.metrics-slide-track-ltr:hover,
+.metrics-slide-track-rtl:hover,
+.metrics-slide-paused {
+  animation-play-state: paused !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .metrics-slide-track-ltr,
+  .metrics-slide-track-rtl {
+    animation: none !important;
+    transform: none !important;
+  }
+  .animate-ambient-glow-1,
+  .animate-ambient-glow-2 {
+    animation: none !important;
+  }
+  .botanical-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* Botanical Reveal Animations & Delays */
+.botanical-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.botanical-reveal.d1 {
+  transition-delay: 0.05s;
+}
+
+.botanical-reveal.d2 {
+  transition-delay: 0.18s;
+}
+
+.botanical-reveal.d3 {
+  transition-delay: 0.32s;
+}
+
+.botanical-reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scoped on-dark theme transitions */
+body.on-dark {
+  transition: background-color 0.4s ease;
+}
+
+/* ========================================================
+   PETALYX VISUAL SYSTEM (Strictly Scoped to Home, About & Portfolio)
+======================================================== */
+.petalyx-scope {
+  --ink: #121410;
+  --olive: #4d6a10;
+  --green: #6f9a0c;
+  --lime: #b4cd52;
+  --pill: #e7efcf;
+  --line: #eef0ea;
+  --bg: #ffffff;
+  --radius: 22px;
+  font-family: "Inter Tight", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* Kinetic Drift Animations */
+@keyframes driftA {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(26px, 4px, 0);
+  }
+}
+
+@keyframes driftB {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-30px, 6px, 0);
+  }
+}
+
+.animate-drift-a {
+  animation: driftA 14s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.animate-drift-b {
+  animation: driftB 17s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Glassmorphism Panel */
+.petalyx-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  border: 1px solid var(--line);
+}
+
+.petalyx-glass-dark {
+  background: rgba(18, 20, 16, 0.78);
+  backdrop-filter: blur(10px) saturate(1.2);
+  -webkit-backdrop-filter: blur(10px) saturate(1.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Pill Component */
+.petalyx-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  background-color: var(--pill);
+  color: var(--olive);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid rgba(77, 106, 16, 0.18);
+}
+
+/* Action Button */
+.petalyx-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: var(--radius);
+  background-color: var(--olive);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(77, 106, 16, 0.25);
+}
+
+.petalyx-btn:hover {
+  transform: translateY(-1px);
+  background-color: #5a7c14;
+  box-shadow: 0 6px 20px rgba(77, 106, 16, 0.35);
+}
+
+/* Grid Squares Overlay */
+.petalyx-sq-field {
+  background-image: 
+    linear-gradient(to right, rgba(111, 154, 12, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(111, 154, 12, 0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Ticket Corner Notches */
+.petalyx-ticket {
+  position: relative;
+  background: var(--lime);
+  color: var(--ink);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-drift-a,
+  .animate-drift-b {
+    animation: none !important;
+  }
+}

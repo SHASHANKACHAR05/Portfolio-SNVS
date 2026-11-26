@@ -1,0 +1,59 @@
+.card-swap-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  overflow: visible;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.card-swap-stage {
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+.card-swap-card {
+  position: absolute;
+  inset: 0;
+  border-radius: 22px;
+  overflow: hidden;
+  will-change: transform, opacity;
+  transform-origin: center center;
+  backface-visibility: hidden;
+  touch-action: pan-y;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card-swap-card--front {
+  cursor: grab;
+  touch-action: none;
+}
+
+.card-swap-card--front:active {
+  cursor: grabbing;
+}
+
+.card-swap-card--light {
+  background: #ffffff;
+  color: #121410;
+  border: 1px solid #d9d2f7;
+  box-shadow: 0 22px 48px -18px rgba(45, 25, 110, 0.22), 0 4px 12px rgba(18, 20, 16, 0.06);
+}
+
+.card-swap-card--dark {
+  background: #141028;
+  color: #f5f3ff;
+  border: 1px solid rgba(207, 198, 246, 0.22);
+  box-shadow: 0 24px 52px -18px rgba(10, 8, 24, 0.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-swap-card {
+    transition: none !important;
+  }
+}
+

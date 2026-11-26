@@ -1,0 +1,108 @@
+/* TiltedCard.css — React Bits TiltedCard */
+.tilted-card-container {
+  position: relative;
+  display: grid;
+  place-items: center;
+  perspective: var(--tc-perspective, 800px);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.tilted-card {
+  position: relative;
+  width: var(--tc-img-w, 300px);
+  height: var(--tc-img-h, 300px);
+  border-radius: var(--tc-radius, 15px);
+  transform-style: preserve-3d;
+  transition: box-shadow 0.4s ease;
+  cursor: default;
+  overflow: hidden;
+}
+
+/* When imageHeight is "auto", the card grows with content */
+.tilted-card[style*="auto"] {
+  height: auto;
+}
+
+.tilted-card--flip-ready {
+  cursor: pointer;
+}
+
+/* Front face: relative so card height is determined by children */
+.tilted-card__face {
+  position: relative;
+  width: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: inherit;
+  overflow: hidden;
+}
+
+/* Back face: absolute overlay, flipped 180deg */
+.tilted-card__face--back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  background: var(--tc-back-bg, #f9f9f9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tilted-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Glare overlays — absolute so they float over content without affecting layout */
+.tilted-card__glare,
+.tilted-card__edge-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.tilted-card__glare {
+  background: radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.4) 0%, transparent 60%);
+}
+
+.tilted-card__layer {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(calc(var(--tc-depth, 20) * 1px));
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.tilted-card__tooltip {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translateX(-50%) rotate(var(--tc-tooltip-rotate, -6deg));
+  background: rgba(255,255,255,0.95);
+  color: #111;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: transform 0.08s ease;
+  letter-spacing: 0.01em;
+}
+
+.tilted-card__overlay {
+  position: absolute;
+  inset: 0;
+  transform: translateZ(calc(var(--tc-overlay-depth, 30) * 1px));
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
